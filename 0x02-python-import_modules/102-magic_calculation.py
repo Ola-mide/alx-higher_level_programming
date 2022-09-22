@@ -7,5 +7,3 @@ def magic_calculation(a, b):
             c = add(c, i)
         return c
     return sub(a, b)
-import dis
-print(dis.dis(magic_calculation))
