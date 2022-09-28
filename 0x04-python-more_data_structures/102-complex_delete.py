@@ -3,10 +3,8 @@ def complex_delete(a_dictionary, value):
     if value == None:
         return a_dictionary
     else:
-        new = a_dictionary.copy()
-        keys = new.keys()
+        keys = list(a_dictionary.keys())
         for key in keys:
             if a_dictionary[key] == value:
-                a_dictionary.pop(key, value)
-        new.clear()
+                del(a_dictionary[key])
         return a_dictionary
