@@ -4,5 +4,5 @@ def safe_print_integer(value):
         value / 1
         print("{:d}".format(value))
         return True
-    except TypeeError:
+    except TypeError:
         return False
