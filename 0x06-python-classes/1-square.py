@@ -14,7 +14,7 @@ class Square:
 
     def __init__(self, size):
         """
-        The __init__ methos initializes the object
+        The __init__ method initializes the object
 
         Args:
             size (int): The size of the square
