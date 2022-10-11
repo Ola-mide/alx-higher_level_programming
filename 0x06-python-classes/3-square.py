@@ -10,7 +10,7 @@ class Square:
 
     Attributes:
         size (int): The size of the square
-    
+
     """
 
     def __init__(self, size=0):
@@ -35,10 +35,9 @@ class Square:
     def area(self):
         """
         Calculating the area of the square
-        
+
         Returns:
-            int: The area of the square
-        
+            integer: The area of the square
+
         """
         return self.__size ** 2
-
