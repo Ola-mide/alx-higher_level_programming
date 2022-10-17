@@ -156,5 +156,8 @@ class Rectangle:
     def square(cls, size=0):
         """
         Getting a square from the Rectangle class
+
+        Args:
+            size (int): The height and width of a square
         """
         return cls(size, size)
