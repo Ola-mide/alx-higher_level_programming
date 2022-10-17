@@ -1,0 +1,21 @@
+>>> add_integer = __import__('0-add_integer').add_integer
+>>> print(add_integer(1, 2))
+3
+>>> print(add_integer(100, -2))
+98
+>>> print(add_integer(2))
+100
+>>> print(add_integer(100.3, -2))
+98
+>>> print(add_integer(-5, 100))
+95
+>>> print(add_integer(-100, -200))
+-300
+>>> print(add_integer(4, "School"))
+Traceback (most recent call last):
+	...
+TypeError: b must be an integer
+>>> print(add_integer(None))
+Traceback (most recent call last):
+...
+TypeError: a must be an integer
