@@ -11,6 +11,4 @@ class MyList(list):
         """
         A method that prints a sorted list
         """
-        lst = self.copy()
-        lst.sort()
-        print(lst)
+        print(sorted(self))
