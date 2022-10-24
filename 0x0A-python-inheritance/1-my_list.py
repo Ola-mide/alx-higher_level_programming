@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 A module containing a class that inherits from list
 """
