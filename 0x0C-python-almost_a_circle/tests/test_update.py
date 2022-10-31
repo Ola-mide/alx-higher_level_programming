@@ -10,7 +10,7 @@ class TestUpdate(unittest.TestCase):
     """Update method test class"""
     def test_update_rectangle_args(self):
         """Testing Rectangle instance attributes after updating with *args"""
-        r1 = Rectangle(10, 10, 10, 10)
+        r1 = Rectangle(10, 10, 10, 10, 1)
         self.assertEqual(r1.__str__(), "[Rectangle] (1) 10/10 - 10/10")
         r1.update(89)
         self.assertEqual(r1.__str__(), "[Rectangle] (89) 10/10 - 10/10")

@@ -7,37 +7,44 @@ from models.square import *
 
 class TestSquare(unittest.TestCase):
     """Square Test class"""
-    s1 = Square(5)
-    s2 = Square(2, 2)
-    s3 = Square(3, 1, 3)
-    s4 = Square(3, 1, 3, 6)
-
     def test_instance_without_id_given(self):
         """Testing created instances withoud id value"""
-        self.assertIsInstance(TestSquare.s1, Square)
-        self.assertIsInstance(TestSquare.s2, Square)
-        self.assertIsInstance(TestSquare.s3, Square)
+        s1 = Square(5)
+        s2 = Square(2, 2)
+        s3 = Square(3, 1, 3)
+        self.assertIsInstance(s1, Square)
+        self.assertIsInstance(s2, Square)
+        self.assertIsInstance(s3, Square)
 
     def test_instance_with_id_given(self):
         """Testing created instances with id value"""
-        self.assertIsInstance(TestSquare.s4, Square)
+        s4 = Square(3, 1, 3, 6)
+        self.assertIsInstance(s4, Square)
 
     def test_id_without_id_given(self):
         """Testing id value for instances created without it"""
-        self.assertEqual(TestSquare.s1.id, 1)
-        self.assertEqual(TestSquare.s2.id, 2)
-        self.assertEqual(TestSquare.s3.id, 3)
+        s1 = Square(5)
+        s2 = Square(2, 2)
+        s3 = Square(3, 1, 3)
+        self.assertEqual(s1.id, 35)
+        self.assertEqual(s2.id, 36)
+        self.assertEqual(s3.id, 37)
 
     def test_id_with_id_given(self):
         """Testing id value for instances created with it"""
-        self.assertEqual(TestSquare.s4.id, 6)
+        s4 = Square(3, 1, 3, 6)
+        self.assertEqual(s4.id, 6)
 
     def test_size(self):
         """Testing the size value"""
-        self.assertEqual(TestSquare.s1.size, 5)
-        self.assertEqual(TestSquare.s2.size, 2)
-        self.assertEqual(TestSquare.s3.size, 3)
-        self.assertEqual(TestSquare.s4.size, 3)
+        s1 = Square(5)
+        s2 = Square(2, 2)
+        s3 = Square(3, 1, 3)
+        s4 = Square(3, 1, 3, 6)
+        self.assertEqual(s1.size, 5)
+        self.assertEqual(s2.size, 2)
+        self.assertEqual(s3.size, 3)
+        self.assertEqual(s4.size, 3)
         self.assertRaisesRegex(TypeError, "width must be an integer",
                                Square, "6"
                                )
@@ -47,10 +54,14 @@ class TestSquare(unittest.TestCase):
 
     def test_x(self):
         """Testing the x value"""
-        self.assertEqual(TestSquare.s1.x, 0)
-        self.assertEqual(TestSquare.s2.x, 2)
-        self.assertEqual(TestSquare.s3.x, 1)
-        self.assertEqual(TestSquare.s4.x, 1)
+        s1 = Square(5)
+        s2 = Square(2, 2)
+        s3 = Square(3, 1, 3)
+        s4 = Square(3, 1, 3, 6)
+        self.assertEqual(s1.x, 0)
+        self.assertEqual(s2.x, 2)
+        self.assertEqual(s3.x, 1)
+        self.assertEqual(s4.x, 1)
         self.assertRaisesRegex(TypeError, "x must be an integer",
                                Square, 6, "4"
                                )
@@ -60,10 +71,14 @@ class TestSquare(unittest.TestCase):
 
     def test_y(self):
         """Testing the y value"""
-        self.assertEqual(TestSquare.s1.y, 0)
-        self.assertEqual(TestSquare.s2.y, 0)
-        self.assertEqual(TestSquare.s3.y, 3)
-        self.assertEqual(TestSquare.s4.y, 3)
+        s1 = Square(5)
+        s2 = Square(2, 2)
+        s3 = Square(3, 1, 3)
+        s4 = Square(3, 1, 3, 6)
+        self.assertEqual(s1.y, 0)
+        self.assertEqual(s2.y, 0)
+        self.assertEqual(s3.y, 3)
+        self.assertEqual(s4.y, 3)
         self.assertRaisesRegex(TypeError, "y must be an integer",
                                Square, 6, 5, "3"
                                )
@@ -73,21 +88,29 @@ class TestSquare(unittest.TestCase):
 
     def test_area(self):
         """Testing the area of each Square instance"""
-        self.assertEqual(TestSquare.s1.area(), 25)
-        self.assertEqual(TestSquare.s2.area(), 4)
-        self.assertEqual(TestSquare.s3.area(), 9)
-        self.assertEqual(TestSquare.s4.area(), 9)
+        s1 = Square(5)
+        s2 = Square(2, 2)
+        s3 = Square(3, 1, 3)
+        s4 = Square(3, 1, 3, 6)
+        self.assertEqual(s1.area(), 25)
+        self.assertEqual(s2.area(), 4)
+        self.assertEqual(s3.area(), 9)
+        self.assertEqual(s4.area(), 9)
 
     def test_str(self):
         """Testing the return value of the __str__ method"""
-        s1_str = "[Square] (1) 0/0 - 5"
-        s2_str = "[Square] (2) 2/0 - 2"
-        s3_str = "[Square] (3) 1/3 - 3"
+        s1 = Square(5)
+        s2 = Square(2, 2)
+        s3 = Square(3, 1, 3)
+        s4 = Square(3, 1, 3, 6)
+        s1_str = "[Square] (46) 0/0 - 5"
+        s2_str = "[Square] (47) 2/0 - 2"
+        s3_str = "[Square] (48) 1/3 - 3"
         s4_str = "[Square] (6) 1/3 - 3"
-        self.assertEqual(TestSquare.s1.__str__(), s1_str)
-        self.assertEqual(TestSquare.s2.__str__(), s2_str)
-        self.assertEqual(TestSquare.s3.__str__(), s3_str)
-        self.assertEqual(TestSquare.s4.__str__(), s4_str)
+        self.assertEqual(s1.__str__(), s1_str)
+        self.assertEqual(s2.__str__(), s2_str)
+        self.assertEqual(s3.__str__(), s3_str)
+        self.assertEqual(s4.__str__(), s4_str)
 
     def test_to_dictionary(self):
         """Testing the dictionary representation of Square"""
