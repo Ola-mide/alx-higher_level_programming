@@ -55,14 +55,17 @@ class Base:
     def from_json_string(json_string):
         """Generating a list of JSON string representation, json_string"""
         if json_string is None or len(json_string) == 0:
-            return "[]"
+            return json.loads("[]")
         else:
             return json.loads(json_string)
 
     @classmethod
     def create(cls, **dictionary):
         """Creating an instance with all attributes set"""
-        dummy = cls(2, 4, 1)
+        if cls.__name__ == "Square":
+            dummy = cls(1)
+        else:
+            dummy = cls(1, 1)
         dummy.update(**dictionary)
         return dummy
 

@@ -3,6 +3,8 @@
 import unittest
 from models.base import *
 from models.rectangle import *
+import io
+import sys
 
 
 class TestRectangle(unittest.TestCase):
@@ -23,8 +25,8 @@ class TestRectangle(unittest.TestCase):
         r1 = Rectangle(3, 2)
         r2 = Rectangle(2, 10)
         """Testing id value for instances created without it"""
-        self.assertEqual(r1.id, 11)
-        self.assertEqual(r2.id, 12)
+        self.assertEqual(r1.id, 14)
+        self.assertEqual(r2.id, 15)
 
     def test_id_with_id_given(self):
         r3 = Rectangle(8, 7, 5, 1, 12)
@@ -45,6 +47,9 @@ class TestRectangle(unittest.TestCase):
         self.assertRaisesRegex(ValueError, "width must be > 0",
                                Rectangle, -10, 30
                                )
+        self.assertRaisesRegex(ValueError, "width must be > 0",
+                               Rectangle, 0, 30
+                               )
 
     def test_height(self):
         """Testing the height value"""
@@ -59,6 +64,9 @@ class TestRectangle(unittest.TestCase):
                                )
         self.assertRaisesRegex(ValueError, "height must be > 0",
                                Rectangle, 10, -4
+                               )
+        self.assertRaisesRegex(ValueError, "height must be > 0",
+                               Rectangle, 10, 0
                                )
 
     def test_x(self):
@@ -100,13 +108,34 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(r2.area(), 20)
         self.assertEqual(r3.area(), 56)
 
+    def test_display(self):
+        """Testing the display output"""
+        r1 = Rectangle(3, 2)
+        r2 = Rectangle(3, 2, 1)
+        r3 = Rectangle(3, 2, 1, 1, 3)
+        output1 = io.StringIO()
+        sys.stdout = output1
+        r1.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output1.getvalue(), "###\n###\n")
+        output2 = io.StringIO()
+        sys.stdout = output2
+        r2.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output2.getvalue(), " ###\n ###\n")
+        output3 = io.StringIO()
+        sys.stdout = output3
+        r3.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output3.getvalue(), "\n ###\n ###\n")
+
     def test_str(self):
         """Testing the return value of the __str__ method"""
         r1 = Rectangle(3, 2)
         r2 = Rectangle(2, 10)
         r3 = Rectangle(8, 7, 5, 1, 12)
-        r1_str = "[Rectangle] (17) 0/0 - 3/2"
-        r2_str = "[Rectangle] (18) 0/0 - 2/10"
+        r1_str = "[Rectangle] (20) 0/0 - 3/2"
+        r2_str = "[Rectangle] (21) 0/0 - 2/10"
         r3_str = "[Rectangle] (12) 5/1 - 8/7"
         self.assertEqual(r1.__str__(), r1_str)
         self.assertEqual(r2.__str__(), r2_str)
@@ -137,6 +166,14 @@ class TestRectangle(unittest.TestCase):
         Rectangle.save_to_file([r1, r2])
         stf = '[{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8}, '\
             '{"id": 2, "width": 2, "height": 4, "x": 0, "y": 0}]'
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read().__str__(), stf)
+        Rectangle.save_to_file(None)
+        stf = '[]'
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read().__str__(), stf)
+        Rectangle.save_to_file([])
+        stf = '[]'
         with open("Rectangle.json", "r") as file:
             self.assertEqual(file.read().__str__(), stf)
 

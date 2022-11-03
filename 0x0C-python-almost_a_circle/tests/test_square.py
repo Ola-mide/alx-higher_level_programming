@@ -3,6 +3,8 @@
 import unittest
 from models.base import *
 from models.square import *
+import io
+import sys
 
 
 class TestSquare(unittest.TestCase):
@@ -26,9 +28,9 @@ class TestSquare(unittest.TestCase):
         s1 = Square(5)
         s2 = Square(2, 2)
         s3 = Square(3, 1, 3)
-        self.assertEqual(s1.id, 35)
-        self.assertEqual(s2.id, 36)
-        self.assertEqual(s3.id, 37)
+        self.assertEqual(s1.id, 39)
+        self.assertEqual(s2.id, 40)
+        self.assertEqual(s3.id, 41)
 
     def test_id_with_id_given(self):
         """Testing id value for instances created with it"""
@@ -50,6 +52,9 @@ class TestSquare(unittest.TestCase):
                                )
         self.assertRaisesRegex(ValueError, "width must be > 0",
                                Square, -10
+                               )
+        self.assertRaisesRegex(ValueError, "width must be > 0",
+                               Square, 0
                                )
 
     def test_x(self):
@@ -97,15 +102,36 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(s3.area(), 9)
         self.assertEqual(s4.area(), 9)
 
+    def test_display(self):
+        """Testing the display output"""
+        s1 = Square(3, 0, 0, 1)
+        s2 = Square(3, 2, 0, 2)
+        s3 = Square(3, 2, 1, 3)
+        output1 = io.StringIO()
+        sys.stdout = output1
+        s1.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output1.getvalue(), "###\n###\n###\n")
+        output2 = io.StringIO()
+        sys.stdout = output2
+        s2.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output2.getvalue(), "  ###\n  ###\n  ###\n")
+        output3 = io.StringIO()
+        sys.stdout = output3
+        s3.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output3.getvalue(), "\n  ###\n  ###\n  ###\n")
+
     def test_str(self):
         """Testing the return value of the __str__ method"""
         s1 = Square(5)
         s2 = Square(2, 2)
         s3 = Square(3, 1, 3)
         s4 = Square(3, 1, 3, 6)
-        s1_str = "[Square] (46) 0/0 - 5"
-        s2_str = "[Square] (47) 2/0 - 2"
-        s3_str = "[Square] (48) 1/3 - 3"
+        s1_str = "[Square] (50) 0/0 - 5"
+        s2_str = "[Square] (51) 2/0 - 2"
+        s3_str = "[Square] (52) 1/3 - 3"
         s4_str = "[Square] (6) 1/3 - 3"
         self.assertEqual(s1.__str__(), s1_str)
         self.assertEqual(s2.__str__(), s2_str)
@@ -137,6 +163,14 @@ class TestSquare(unittest.TestCase):
         Square.save_to_file([s1, s2])
         stf = '[{"id": 8, "size": 10, "x": 7, "y": 2}, '\
             '{"id": 1, "size": 2, "x": 4, "y": 0}]'
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read().__str__(), stf)
+        Square.save_to_file(None)
+        stf = '[]'
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read().__str__(), stf)
+        Square.save_to_file([])
+        stf = '[]'
         with open("Square.json", "r") as file:
             self.assertEqual(file.read().__str__(), stf)
 
