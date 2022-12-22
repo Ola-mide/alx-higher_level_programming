@@ -16,5 +16,5 @@ if __name__ == "__main__":
     cursor = db.cursor()
     cursor.execute("SELECT * from states ORDER BY states.id ASC")
     for row in cursor.fetchall():
-        print("({}, \'{}\')".format(row[0], row[1]))
+        print(row)
     db.close()
