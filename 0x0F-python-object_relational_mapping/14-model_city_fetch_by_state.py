@@ -13,7 +13,7 @@ if __name__ == "__main__":
     url = 'mysql+mysqldb://{}:{}@localhost/{}'
     engine = create_engine(url.format(
         sys.argv[1],
-        'Olamideola-22',
+        sys.argv[2],
         sys.argv[3]),
         pool_pre_ping=True
         )
