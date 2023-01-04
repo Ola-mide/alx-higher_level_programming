@@ -16,7 +16,6 @@ class City(Base):
         name (str): column for state names
         state_id (int): column for state id
     """
-
     __tablename__ = 'cities'
     id = Column(
             Integer,
@@ -31,5 +30,5 @@ class City(Base):
             )
     state_id = Column(
             Integer,
-            ForeignKey('state.id')
+            ForeignKey('states.id')
             )
